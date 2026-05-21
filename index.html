@@ -10,35 +10,24 @@
 <meta name="apple-mobile-web-app-title" content="Liva"/>
 <title>Liva · Учёт времени</title>
 <link rel="manifest" href="manifest.json"/>
-<link rel="apple-touch-icon" href="icon-192.png"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-:root{
-  --green:#1D9E75;--green-dark:#0F6E56;--green-light:#E1F5EE;
-  --bg:#F7F8F7;--card:#fff;--border:#E5E7E5;
-  --text:#1A1A1A;--muted:#6B7280;--danger:#DC2626;
-  --shadow:0 1px 4px rgba(0,0,0,.08);
-}
+:root{--green:#1D9E75;--green-dark:#0F6E56;--green-light:#E1F5EE;--bg:#F7F8F7;--card:#fff;--border:#E5E7E5;--text:#1A1A1A;--muted:#6B7280;--danger:#DC2626}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
-.screen{display:none;min-height:100vh}
-.screen.active{display:block}
-
-/* LOGIN */
+.screen{display:none;min-height:100vh}.screen.active{display:block}
 .login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
 .login-logo{width:64px;height:64px;background:var(--green);border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem}
 .login-logo svg{width:36px;height:36px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round}
-.login-card{background:var(--card);border-radius:20px;padding:2rem;width:100%;max-width:360px;box-shadow:var(--shadow)}
+.login-card{background:var(--card);border-radius:20px;padding:2rem;width:100%;max-width:360px}
 .login-card h1{font-size:20px;font-weight:600;margin-bottom:4px}
 .login-card p{color:var(--muted);font-size:13px;margin-bottom:1.5rem}
 .field{margin-bottom:1rem}
 .field label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.field select,.field input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;background:var(--bg);color:var(--text);outline:none;transition:border .2s}
+.field select,.field input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;background:var(--bg);color:var(--text);outline:none}
 .field select:focus,.field input:focus{border-color:var(--green)}
-.btn-primary{width:100%;padding:14px;background:var(--green);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;transition:background .2s}
+.btn-primary{width:100%;padding:14px;background:var(--green);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer}
 .btn-primary:active{background:var(--green-dark)}
 .error-msg{color:var(--danger);font-size:13px;text-align:center;margin-bottom:12px;display:none}
-
-/* TOPBAR */
 .topbar{background:var(--card);padding:14px 16px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
 .topbar-left h2{font-size:17px;font-weight:600}
 .topbar-left p{font-size:12px;color:var(--muted);margin-top:1px}
@@ -47,25 +36,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .badge-admin{background:#FEF3C7;color:#92400E}
 .badge-owner{background:#EDE9FE;color:#5B21B6}
 .btn-sm{padding:6px 12px;border:1.5px solid var(--border);border-radius:8px;background:transparent;font-size:13px;cursor:pointer;color:var(--text)}
-.btn-sm:active{background:var(--bg)}
-
-/* MONTH PICKER */
 .month-bar{padding:12px 16px;display:flex;align-items:center;gap:8px}
 .month-bar select{flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;background:var(--card);color:var(--text)}
 .btn-export{padding:10px 14px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer}
-
-/* METRICS */
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 16px}
-.metric{background:var(--card);border-radius:14px;padding:14px 10px;text-align:center;box-shadow:var(--shadow)}
+.metric{background:var(--card);border-radius:14px;padding:14px 10px;text-align:center}
 .metric .val{font-size:20px;font-weight:700;color:var(--green)}
 .metric .lbl{font-size:11px;color:var(--muted);margin-top:3px}
-
-/* CALENDAR */
 .cal-wrap{padding:0 16px 16px}
 .cal-header{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px}
 .cal-header span{text-align:center;font-size:11px;font-weight:600;color:var(--muted)}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.day-cell{aspect-ratio:1;border-radius:10px;border:1.5px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:var(--card);transition:all .15s;padding:2px}
+.day-cell{aspect-ratio:1;border-radius:10px;border:1.5px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:var(--card);padding:2px}
 .day-cell:active{transform:scale(.95)}
 .day-cell.empty{border:none;background:transparent;cursor:default}
 .day-cell.today{border-color:var(--green)}
@@ -73,17 +55,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .day-cell.weekend{opacity:.5}
 .day-cell .dn{font-size:13px;font-weight:500}
 .day-cell .dh{font-size:10px;font-weight:700;color:var(--green)}
-
-/* DETAIL TABLE */
 .section{padding:0 16px 80px}
 .section h3{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
-.entry-row{background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow)}
+.entry-row{background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
 .entry-row .date{font-weight:600;font-size:14px}
 .entry-row .segs{font-size:12px;color:var(--muted);margin-top:2px}
 .entry-row .hours{font-size:18px;font-weight:700;color:var(--green)}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:flex;align-items:flex-end;justify-content:center;display:none}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:none;align-items:flex-end;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal{background:var(--card);border-radius:24px 24px 0 0;padding:1.5rem 1.25rem 2rem;width:100%;max-width:480px}
 .modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 1.25rem}
@@ -98,45 +76,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .btn-save{padding:14px;background:var(--green);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer}
 .btn-cancel{padding:14px;background:var(--bg);color:var(--text);border:1.5px solid var(--border);border-radius:12px;font-size:15px;cursor:pointer}
-
-/* ADMIN */
 .date-bar{padding:12px 16px;display:flex;align-items:center;gap:8px}
 .date-bar input[type=date]{flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;background:var(--card);color:var(--text)}
 .emp-list{padding:0 16px 80px}
-.emp-card{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between}
-.emp-card .emp-info .name{font-weight:600;font-size:15px}
-.emp-card .emp-info .seg-info{font-size:12px;color:var(--muted);margin-top:2px}
-.emp-card .right{display:flex;align-items:center;gap:10px}
-.emp-card .hours-badge{font-size:16px;font-weight:700;color:var(--green)}
+.emp-card{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.emp-card .name{font-weight:600;font-size:15px}
+.emp-card .seg-info{font-size:12px;color:var(--muted);margin-top:2px}
+.emp-card .hours-badge{font-size:16px;font-weight:700;color:var(--green);margin-right:8px}
 .btn-edit{padding:7px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;font-size:13px;cursor:pointer}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--border);margin-right:8px;flex-shrink:0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border);margin-right:8px;flex-shrink:0;display:inline-block}
 .dot.active{background:var(--green)}
-
-/* OWNER TABS */
 .tabs{display:flex;gap:6px;padding:0 16px 12px}
 .tab{flex:1;padding:10px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;background:transparent;color:var(--muted);text-align:center}
 .tab.active{background:var(--green);color:#fff;border-color:var(--green)}
-
-/* OWNER TABLE */
 .owner-table-wrap{padding:0 16px 80px;overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{text-align:left;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;padding:8px 10px;border-bottom:2px solid var(--border)}
 td{padding:10px;border-bottom:1px solid var(--border)}
 .total-row td{font-weight:700;background:var(--green-light);color:var(--green-dark)}
-tr:last-child td{border-bottom:none}
-
-/* LOADING */
 .loading{display:flex;align-items:center;justify-content:center;padding:3rem;color:var(--muted);font-size:14px}
 .spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .6s linear infinite;margin-right:10px}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* NOTICE */
 .notice{margin:1rem 16px;padding:14px;background:var(--green-light);border-radius:12px;font-size:13px;color:var(--green-dark)}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="s-login" class="screen active">
   <div class="login-screen">
     <div class="login-logo">
@@ -159,53 +124,32 @@ tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-<!-- EMPLOYEE -->
 <div id="s-employee" class="screen">
   <div class="topbar">
-    <div class="topbar-left">
-      <h2 id="emp-name"></h2>
-      <p><span class="badge badge-employee">Сотрудник</span></p>
-    </div>
+    <div class="topbar-left"><h2 id="emp-name"></h2><p><span class="badge badge-employee">Сотрудник</span></p></div>
     <button class="btn-sm" onclick="logout()">Выход</button>
   </div>
-  <div class="month-bar">
-    <select id="emp-month" onchange="loadEmpData()"></select>
-  </div>
+  <div class="month-bar"><select id="emp-month" onchange="loadEmpData()"></select></div>
   <div class="metrics" id="emp-metrics"></div>
   <div class="cal-wrap">
-    <div class="cal-header">
-      <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
-    </div>
+    <div class="cal-header"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
     <div class="cal-grid" id="emp-cal"></div>
   </div>
-  <div class="section">
-    <h3>Детализация</h3>
-    <div id="emp-detail"></div>
-  </div>
+  <div class="section"><h3>Детализация</h3><div id="emp-detail"></div></div>
 </div>
 
-<!-- ADMIN -->
 <div id="s-admin" class="screen">
   <div class="topbar">
-    <div class="topbar-left">
-      <h2>Табель дня</h2>
-      <p><span class="badge badge-admin">Администратор</span></p>
-    </div>
+    <div class="topbar-left"><h2>Табель дня</h2><p><span class="badge badge-admin">Администратор</span></p></div>
     <button class="btn-sm" onclick="logout()">Выход</button>
   </div>
-  <div class="date-bar">
-    <input type="date" id="admin-date" onchange="loadAdminDay()"/>
-  </div>
+  <div class="date-bar"><input type="date" id="admin-date" onchange="loadAdminDay()"/></div>
   <div class="emp-list" id="admin-list"></div>
 </div>
 
-<!-- OWNER -->
 <div id="s-owner" class="screen">
   <div class="topbar">
-    <div class="topbar-left">
-      <h2>Liva · Все данные</h2>
-      <p><span class="badge badge-owner">Директор</span></p>
-    </div>
+    <div class="topbar-left"><h2>Liva · Все данные</h2><p><span class="badge badge-owner">Директор</span></p></div>
     <button class="btn-sm" onclick="logout()">Выход</button>
   </div>
   <div class="month-bar">
@@ -220,7 +164,6 @@ tr:last-child td{border-bottom:none}
   <div class="owner-table-wrap"><div id="owner-view"></div></div>
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal" id="modal">
     <div class="modal-handle"></div>
@@ -240,37 +183,32 @@ tr:last-child td{border-bottom:none}
 const API = 'https://script.google.com/macros/s/AKfycbw_BV00zMFCjGAoM6YOymMUg_BnMOxf9uvfWTFn-39Sca6nflOc1mFg9ZWhmWeNNpyKqQ/exec';
 
 const USERS = [
-  {id:'kachurovska',name:'Kachurovska',pin:'1001',role:'employee'},
-  {id:'holovatyuk',name:'Holovatyuk',pin:'1002',role:'employee'},
-  {id:'cherkashyn',name:'Cherkashyn',pin:'1003',role:'employee'},
-  {id:'onyshchenko',name:'Onyshchenko',pin:'1004',role:'employee'},
-  {id:'voloshchuk',name:'Voloshchuk',pin:'1005',role:'employee'},
-  {id:'hurina',name:'Hurina',pin:'1006',role:'employee'},
-  {id:'hrydasov',name:'Hrydasov',pin:'1007',role:'employee'},
-  {id:'shynkarenko',name:'Shynkarenko',pin:'1008',role:'employee'},
-  {id:'blinova',name:'Blinova',pin:'1009',role:'employee'},
-  {id:'pufler',name:'Pufler',pin:'1010',role:'employee'},
-  {id:'tokar',name:'Tokar Yevhen',pin:'1011',role:'employee'},
-  {id:'most',name:'Zhenya Most',pin:'1012',role:'employee'},
-  {id:'nikonenko',name:'Nikonenko',pin:'1013',role:'employee'},
-  {id:'litkevych',name:'Litkevych',pin:'1014',role:'employee'},
+  {id:'kachurovska',name:'Kachurovska',rate:8,type:'pogodba',pin:'1001',role:'employee'},
+  {id:'holovatyuk',name:'Holovatyuk',rate:8,type:'pogodba',pin:'1002',role:'employee'},
+  {id:'cherkashyn',name:'Cherkashyn',rate:10,type:'pogodba',pin:'1003',role:'employee'},
+  {id:'onyshchenko',name:'Onyshchenko',rate:8.5,type:'pogodba',pin:'1004',role:'employee'},
+  {id:'voloshchuk',name:'Voloshchuk',rate:8.5,type:'pogodba',pin:'1005',role:'employee'},
+  {id:'hurina',name:'Hurina',rate:8.5,type:'pogodba',pin:'1006',role:'employee'},
+  {id:'hrydasov',name:'Hrydasov',rate:7.5,type:'pogodba',pin:'1007',role:'employee'},
+  {id:'shynkarenko',name:'Shynkarenko',rate:7,type:'student',pin:'1008',role:'employee'},
+  {id:'blinova',name:'Blinova',rate:8.5,type:'student',pin:'1009',role:'employee'},
+  {id:'pufler',name:'Pufler',rate:8,type:'student',pin:'1010',role:'employee'},
+  {id:'tokar',name:'Tokar Yevhen',rate:9,type:'sp',pin:'1011',role:'employee'},
+  {id:'most',name:'Zhenya Most',rate:9,type:'sp',pin:'1012',role:'employee'},
+  {id:'nikonenko',name:'Nikonenko',rate:9,type:'sp',pin:'1013',role:'employee'},
+  {id:'litkevych',name:'Litkevych',rate:8.5,type:'najem',pin:'1014',role:'employee'},
   {id:'admin',name:'Администратор',pin:'9001',role:'admin'},
   {id:'alexander',name:'Александр',pin:'8001',role:'owner'},
   {id:'polina',name:'Полина',pin:'8002',role:'owner'},
 ];
 
-let currentUser = null;
-let ownerTabActive = 'all';
-let ownerData = null;
-let empEntries = {};
-let modalEmpId = null, modalDate = null, modalSegs = [];
+let currentUser=null,ownerTabActive='all',ownerData=null,empEntries={};
+let modalEmpId=null,modalDate=null,modalSegs=[];
 
-// UTILS
 function todayStr(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1).toString().padStart(2,'0')+'-'+d.getDate().toString().padStart(2,'0')}
 function dayStr(ym,d){const[y,m]=ym.split('-');return y+'-'+m+'-'+d.toString().padStart(2,'0')}
 function getDays(ym){const[y,m]=ym.split('-').map(Number);return new Date(y,m,0).getDate()}
 function calcH(segs){return segs.reduce((a,s)=>{if(!s.from||!s.to)return a;const[fh,fm]=s.from.split(':').map(Number);const[th,tm]=s.to.split(':').map(Number);const d=(th*60+tm)-(fh*60+fm);return a+(d>0?d:0)},0)/60}
-function fmtH(h){return h>0?h.toFixed(1)+' ч':'—'}
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
 
 function monthOptions(selId){
@@ -285,32 +223,32 @@ function monthOptions(selId){
   }
 }
 
+// JSONP запрос — работает на iOS Safari
 function api(body){
-  return new Promise((resolve)=>{
-    const cb='cb'+Date.now();
-    const params=new URLSearchParams({action:body.action,data:JSON.stringify(body),callback:cb});
-    const url=API+'?'+params.toString();
+  return new Promise(resolve=>{
+    const cbName='liva_cb_'+Date.now()+'_'+Math.floor(Math.random()*9999);
+    const params=new URLSearchParams();
+    params.set('action',body.action);
+    params.set('data',JSON.stringify(body));
+    params.set('callback',cbName);
     const script=document.createElement('script');
     const timer=setTimeout(()=>{
-      delete window[cb];document.body.removeChild(script);
-      resolve({ok:false,error:'Timeout — проверь интернет'});
-    },15000);
-    window[cb]=(data)=>{
+      cleanup();resolve({ok:false,error:'Timeout'});
+    },20000);
+    function cleanup(){
       clearTimeout(timer);
-      delete window[cb];
-      try{document.body.removeChild(script)}catch(e){}
-      resolve(data);
+      delete window[cbName];
+      if(script.parentNode)script.parentNode.removeChild(script);
+    }
+    window[cbName]=function(data){
+      cleanup();resolve(data);
     };
-    script.src=url;
-    script.onerror=()=>{
-      clearTimeout(timer);delete window[cb];
-      resolve({ok:false,error:'Ошибка сети'});
-    };
-    document.body.appendChild(script);
+    script.src=API+'?'+params.toString();
+    script.onerror=function(){cleanup();resolve({ok:false,error:'Ошибка сети'});};
+    document.head.appendChild(script);
   });
 }
 
-// LOGIN
 function populateUsers(){
   const sel=document.getElementById('login-user');
   USERS.forEach(u=>{
@@ -327,9 +265,9 @@ async function doLogin(){
   err.style.display='none';
   if(!uid||!pin){err.textContent='Выбери сотрудника и введи пин';err.style.display='block';return}
   const btn=document.querySelector('.btn-primary');btn.textContent='Проверяем...';btn.disabled=true;
-  const res=await api({action:'login',userId:uid,pin});
+  const res=await api({action:'login',userId:uid,pin:pin});
   btn.textContent='Войти';btn.disabled=false;
-  if(!res.ok){err.textContent=res.error||'Ошибка';err.style.display='block';return}
+  if(!res.ok){err.textContent=res.error||'Ошибка соединения';err.style.display='block';return}
   currentUser=res.user;
   if(currentUser.role==='employee')showEmployee();
   else if(currentUser.role==='admin')showAdmin();
@@ -338,12 +276,10 @@ async function doLogin(){
 
 function logout(){currentUser=null;empEntries={};ownerData=null;show('s-login');document.getElementById('login-pin').value=''}
 
-// EMPLOYEE
 function showEmployee(){
   show('s-employee');
   document.getElementById('emp-name').textContent=currentUser.name;
-  monthOptions('emp-month');
-  loadEmpData();
+  monthOptions('emp-month');loadEmpData();
 }
 
 async function loadEmpData(){
@@ -353,9 +289,8 @@ async function loadEmpData(){
   document.getElementById('emp-detail').innerHTML='';
   const res=await api({action:'getEntries',empId:currentUser.id,month:ym});
   if(res.ok)empEntries=res.entries||{};
-  renderEmpCalendar(ym);
-  renderEmpMetrics(ym);
-  renderEmpDetail(ym);
+  else empEntries={};
+  renderEmpCalendar(ym);renderEmpMetrics(ym);renderEmpDetail(ym);
 }
 
 function renderEmpCalendar(ym){
@@ -364,9 +299,7 @@ function renderEmpCalendar(ym){
   const firstDow=(new Date(y,m-1,1).getDay()+6)%7;
   for(let i=0;i<firstDow;i++){const e=document.createElement('div');e.className='day-cell empty';cal.appendChild(e)}
   for(let d=1;d<=days;d++){
-    const ds=dayStr(ym,d);
-    const segs=empEntries[ds]||[];
-    const h=calcH(segs);
+    const ds=dayStr(ym,d);const segs=empEntries[ds]||[];const h=calcH(segs);
     const dow=(new Date(y,m-1,d).getDay()+6)%7;
     const cell=document.createElement('div');
     cell.className='day-cell'+(h>0?' has-entry':'')+(dow>=5?' weekend':'')+(ds===todayStr()?' today':'');
@@ -378,7 +311,7 @@ function renderEmpCalendar(ym){
 
 function renderEmpMetrics(ym){
   const days=getDays(ym);let total=0;
-  for(let d=1;d<=days;d++){const segs=empEntries[dayStr(ym,d)]||[];total+=calcH(segs)}
+  for(let d=1;d<=days;d++){total+=calcH(empEntries[dayStr(ym,d)]||[])}
   const rate=currentUser.rate||0;
   document.getElementById('emp-metrics').innerHTML=
     '<div class="metric"><div class="val">'+total.toFixed(1)+'</div><div class="lbl">Часов</div></div>'+
@@ -391,20 +324,16 @@ function renderEmpDetail(ym){
   const det=document.getElementById('emp-detail');det.innerHTML='';
   const DOW=['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
   for(let d=1;d<=days;d++){
-    const ds=dayStr(ym,d);
-    const segs=empEntries[ds]||[];
-    if(!segs.length)continue;
-    const h=calcH(segs);
-    const dow=DOW[new Date(y,m-1,d).getDay()];
+    const ds=dayStr(ym,d);const segs=empEntries[ds]||[];if(!segs.length)continue;
+    const h=calcH(segs);const dow=DOW[new Date(y,m-1,d).getDay()];
     const row=document.createElement('div');row.className='entry-row';
     row.innerHTML='<div><div class="date">'+d+' '+dow+'</div><div class="segs">'+segs.map(s=>s.from+'–'+s.to).join(', ')+'</div></div><div class="hours">'+h.toFixed(1)+' ч</div>';
     row.onclick=()=>openModal(currentUser.id,ds,segs);
     det.appendChild(row);
   }
-  if(!det.children.length)det.innerHTML='<div class="notice">В этом месяце записей нет. Нажми на день в календаре чтобы добавить.</div>';
+  if(!det.children.length)det.innerHTML='<div class="notice">Нажми на день в календаре чтобы добавить время.</div>';
 }
 
-// ADMIN
 function showAdmin(){
   show('s-admin');
   document.getElementById('admin-date').value=todayStr();
@@ -417,21 +346,20 @@ async function loadAdminDay(){
   list.innerHTML='<div class="loading"><div class="spinner"></div>Загрузка...</div>';
   const res=await api({action:'getMonth',month:ds.substring(0,7)});
   const data=res.ok?res.data:{};
+  const users=res.ok?res.users:USERS.filter(u=>u.role==='employee');
   list.innerHTML='';
-  res.users.forEach(emp=>{
+  users.forEach(emp=>{
     const segs=(data[emp.id]&&data[emp.id][ds])||[];
     const h=calcH(segs);
     const card=document.createElement('div');card.className='emp-card';
-    card.innerHTML='<div style="display:flex;align-items:center"><div class="dot'+(h>0?' active':'')+'"></div><div class="emp-info"><div class="name">'+emp.name+'</div><div class="seg-info">'+(segs.length?segs.map(s=>s.from+'–'+s.to).join(', '):'Нет записи')+'</div></div></div><div class="right"><div class="hours-badge">'+(h>0?h.toFixed(1)+' ч':'')+'</div><button class="btn-edit" onclick="openModal(\''+emp.id+'\',\''+ds+'\','+(segs.length?'JSON.parse(decodeURIComponent(\''+encodeURIComponent(JSON.stringify(segs))+'\'))':'[]')+')">Изменить</button></div>';
+    const segsEnc=encodeURIComponent(JSON.stringify(segs));
+    card.innerHTML='<div style="display:flex;align-items:center;flex:1"><span class="dot'+(h>0?' active':'')+'"></span><div><div class="name">'+emp.name+'</div><div class="seg-info">'+(segs.length?segs.map(s=>s.from+'–'+s.to).join(', '):'Нет записи')+'</div></div></div><div style="display:flex;align-items:center"><span class="hours-badge">'+(h>0?h.toFixed(1)+' ч':'')+'</span><button class="btn-edit" onclick=\'openModal("'+emp.id+'","'+ds+'",JSON.parse(decodeURIComponent("'+segsEnc+'")))\'>✎</button></div>';
     list.appendChild(card);
   });
 }
 
-// OWNER
 function showOwner(){
-  show('s-owner');
-  monthOptions('owner-month');
-  loadOwnerData();
+  show('s-owner');monthOptions('owner-month');loadOwnerData();
 }
 
 async function loadOwnerData(){
@@ -439,10 +367,8 @@ async function loadOwnerData(){
   document.getElementById('owner-metrics').innerHTML='<div class="loading" style="grid-column:1/-1"><div class="spinner"></div>Загрузка...</div>';
   document.getElementById('owner-view').innerHTML='';
   const res=await api({action:'getMonth',month:ym});
-  if(!res.ok){document.getElementById('owner-view').innerHTML='<div class="notice">Ошибка загрузки</div>';return}
-  ownerData=res;
-  renderOwnerMetrics(ym);
-  renderOwnerView(ym);
+  if(!res.ok){document.getElementById('owner-view').innerHTML='<div class="notice">Ошибка загрузки: '+(res.error||'')+'</div>';document.getElementById('owner-metrics').innerHTML='';return}
+  ownerData=res;renderOwnerMetrics(ym);renderOwnerView(ym);
 }
 
 function ownerTab(t){
@@ -454,11 +380,9 @@ function ownerTab(t){
 
 function renderOwnerMetrics(ym){
   if(!ownerData)return;
-  const days=getDays(ym);let totalH=0,totalEur=0,active=0;
+  const days=getDays(ym);let totalH=0,totalEur=0;
   ownerData.users.forEach(emp=>{
-    let h=0;
-    for(let d=1;d<=days;d++){const segs=(ownerData.data[emp.id]&&ownerData.data[emp.id][dayStr(ym,d)])||[];h+=calcH(segs)}
-    if(h>0)active++;
+    let h=0;for(let d=1;d<=days;d++){h+=calcH((ownerData.data[emp.id]&&ownerData.data[emp.id][dayStr(ym,d)])||[])}
     totalH+=h;totalEur+=h*(emp.rate||0);
   });
   document.getElementById('owner-metrics').innerHTML=
@@ -473,8 +397,7 @@ function renderOwnerView(ym){
     let html='<table><tr><th>Сотрудник</th><th>Тип</th><th>Часов</th><th>Начислено</th></tr>';
     let tH=0,tE=0;
     ownerData.users.forEach(emp=>{
-      let h=0;
-      for(let d=1;d<=days;d++){const segs=(ownerData.data[emp.id]&&ownerData.data[emp.id][dayStr(ym,d)])||[];h+=calcH(segs)}
+      let h=0;for(let d=1;d<=days;d++){h+=calcH((ownerData.data[emp.id]&&ownerData.data[emp.id][dayStr(ym,d)])||[])}
       const eur=h*(emp.rate||0);tH+=h;tE+=eur;
       if(h>0)html+='<tr><td style="font-weight:600">'+emp.name+'</td><td style="color:var(--muted)">'+emp.type+'</td><td>'+h.toFixed(1)+'</td><td style="font-weight:700;color:var(--green)">'+eur.toFixed(2)+'€</td></tr>';
     });
@@ -488,17 +411,15 @@ function renderOwnerView(ym){
     for(let d=1;d<=days;d++){
       const ds=dayStr(ym,d);let dayH=0;let cells='';
       ownerData.users.forEach(emp=>{
-        const segs=(ownerData.data[emp.id]&&ownerData.data[emp.id][ds])||[];
-        const h=calcH(segs);dayH+=h;
-        cells+='<td style="text-align:center;'+(h>0?'font-weight:700;color:var(--green)':'color:var(--muted)')+'">'+( h>0?h.toFixed(1):'')+'</td>';
+        const h=calcH((ownerData.data[emp.id]&&ownerData.data[emp.id][ds])||[]);
+        dayH+=h;cells+='<td style="text-align:center;'+(h>0?'font-weight:700;color:var(--green)':'color:var(--muted)')+'">'+( h>0?h.toFixed(1):'')+'</td>';
       });
-      if(dayH>0){const[y,m]=ym.split('-').map(Number);html+='<tr><td style="white-space:nowrap;font-weight:600">'+d+' '+DOW[new Date(y,m-1,d).getDay()]+'</td>'+cells+'<td style="font-weight:700">'+dayH.toFixed(1)+'</td></tr>'}
+      if(dayH>0){const[y,m2]=ym.split('-').map(Number);html+='<tr><td style="white-space:nowrap;font-weight:600">'+d+' '+DOW[new Date(y,m2-1,d).getDay()]+'</td>'+cells+'<td style="font-weight:700">'+dayH.toFixed(1)+'</td></tr>'}
     }
     html+='</table>';view.innerHTML=html;
   }
 }
 
-// EXCEL EXPORT
 function exportExcel(){
   if(!ownerData)return;
   const ym=document.getElementById('owner-month').value;
@@ -507,8 +428,7 @@ function exportExcel(){
   const ws1=[['Сотрудник','Тип','Ставка','Часов','Начислено €']];
   let tH=0,tE=0;
   ownerData.users.forEach(emp=>{
-    let h=0;
-    for(let d=1;d<=days;d++){const segs=(ownerData.data[emp.id]&&ownerData.data[emp.id][dayStr(ym,d)])||[];h+=calcH(segs)}
+    let h=0;for(let d=1;d<=days;d++){h+=calcH((ownerData.data[emp.id]&&ownerData.data[emp.id][dayStr(ym,d)])||[])}
     const eur=h*(emp.rate||0);tH+=h;tE+=eur;
     if(h>0)ws1.push([emp.name,emp.type,emp.rate,+h.toFixed(2),+eur.toFixed(2)]);
   });
@@ -527,10 +447,9 @@ function exportExcel(){
   XLSX.writeFile(wb,'Liva_'+ym+'.xlsx');
 }
 
-// MODAL
 function openModal(empId,date,segs){
   modalEmpId=empId;modalDate=date;
-  modalSegs=segs.length?JSON.parse(JSON.stringify(segs)):[{from:'',to:''}];
+  modalSegs=segs&&segs.length?JSON.parse(JSON.stringify(segs)):[{from:'',to:''}];
   const parts=date.split('-');
   document.getElementById('modal-title').textContent=parts[2]+'.'+parts[1]+'.'+parts[0];
   renderModalSegs();
@@ -549,7 +468,7 @@ function renderModalSegs(){
     if(modalSegs.length>1){
       const del=document.createElement('div');
       del.style.cssText='grid-column:1/-1;text-align:right;font-size:12px;color:var(--danger);cursor:pointer;margin-bottom:4px';
-      del.textContent='Удалить сегмент';
+      del.textContent='Удалить';
       del.onclick=()=>{modalSegs.splice(i,1);renderModalSegs()};
       c.appendChild(del);
     }
@@ -564,8 +483,7 @@ function updateModalTotal(){
     const el=document.getElementById('sh'+i);if(!el)return;
     const h=calcH([s]);el.textContent=h>0?h.toFixed(1)+'ч':'';
   });
-  const tot=calcH(modalSegs);
-  document.getElementById('modal-total').textContent='Итого: '+tot.toFixed(2)+' ч';
+  document.getElementById('modal-total').textContent='Итого: '+calcH(modalSegs).toFixed(2)+' ч';
 }
 
 async function saveEntry(){
@@ -580,8 +498,8 @@ async function saveEntry(){
   else loadOwnerData();
 }
 
-// INIT
 populateUsers();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body>
 </html>

@@ -223,30 +223,28 @@ function monthOptions(selId){
   }
 }
 
-// JSONP запрос — работает на iOS Safari
-function api(body){
-  return new Promise(resolve=>{
-    const cbName='liva_cb_'+Date.now()+'_'+Math.floor(Math.random()*9999);
+async function api(body){
+  try{
     const params=new URLSearchParams();
     params.set('action',body.action);
     params.set('data',JSON.stringify(body));
-    params.set('callback',cbName);
-    const script=document.createElement('script');
-    const timer=setTimeout(()=>{
-      cleanup();resolve({ok:false,error:'Timeout'});
-    },20000);
-    function cleanup(){
-      clearTimeout(timer);
-      delete window[cbName];
-      if(script.parentNode)script.parentNode.removeChild(script);
-    }
-    window[cbName]=function(data){
-      cleanup();resolve(data);
-    };
-    script.src=API+'?'+params.toString();
-    script.onerror=function(){cleanup();resolve({ok:false,error:'Ошибка сети'});};
-    document.head.appendChild(script);
-  });
+    const res=await fetch(API+'?'+params.toString(),{method:'GET',redirect:'follow'});
+    const text=await res.text();
+    try{return JSON.parse(text)}
+    catch(e){const m=text.match(/\{[\s\S]*\}/);if(m)return JSON.parse(m[0]);return{ok:false,error:'Неверный ответ'}}
+  }catch(e){
+    return new Promise(resolve=>{
+      const cbName='liva_cb_'+Date.now();
+      const p=new URLSearchParams();
+      p.set('action',body.action);p.set('data',JSON.stringify(body));p.set('callback',cbName);
+      const s=document.createElement('script');
+      const t=setTimeout(()=>{delete window[cbName];if(s.parentNode)s.parentNode.removeChild(s);resolve({ok:false,error:'Timeout'});},20000);
+      window[cbName]=d=>{clearTimeout(t);delete window[cbName];if(s.parentNode)s.parentNode.removeChild(s);resolve(d);};
+      s.src=API+'?'+p.toString();
+      s.onerror=()=>{clearTimeout(t);delete window[cbName];resolve({ok:false,error:'Ошибка сети'});};
+      document.head.appendChild(s);
+    });
+  }
 }
 
 function populateUsers(){

@@ -180,7 +180,7 @@ td{padding:10px;border-bottom:1px solid var(--border)}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
-const API = 'https://script.google.com/macros/s/AKfycbw_BV00zMFCjGAoM6YOymMUg_BnMOxf9uvfWTFn-39Sca6nflOc1mFg9ZWhmWeNNpyKqQ/exec';
+const API = 'https://script.google.com/macros/s/AKfycbxEA2p0is5vGBAUvwtFcy67-xk-4SiS5Q-bhOUYA69WZdX6JWCNOtWOFAkTxePo-D6y4A/exec';
 
 const USERS = [
   {id:'kachurovska',name:'Kachurovska',rate:8,type:'pogodba',pin:'1001',role:'employee'},
@@ -223,28 +223,34 @@ function monthOptions(selId){
   }
 }
 
-async function api(body){
-  try{
+function api(body){
+  return new Promise(resolve=>{
+    const cbName='liva_'+Date.now()+'_'+Math.floor(Math.random()*99999);
     const params=new URLSearchParams();
     params.set('action',body.action);
     params.set('data',JSON.stringify(body));
-    const res=await fetch(API+'?'+params.toString(),{method:'GET',redirect:'follow'});
-    const text=await res.text();
-    try{return JSON.parse(text)}
-    catch(e){const m=text.match(/\{[\s\S]*\}/);if(m)return JSON.parse(m[0]);return{ok:false,error:'Неверный ответ'}}
-  }catch(e){
-    return new Promise(resolve=>{
-      const cbName='liva_cb_'+Date.now();
-      const p=new URLSearchParams();
-      p.set('action',body.action);p.set('data',JSON.stringify(body));p.set('callback',cbName);
-      const s=document.createElement('script');
-      const t=setTimeout(()=>{delete window[cbName];if(s.parentNode)s.parentNode.removeChild(s);resolve({ok:false,error:'Timeout'});},20000);
-      window[cbName]=d=>{clearTimeout(t);delete window[cbName];if(s.parentNode)s.parentNode.removeChild(s);resolve(d);};
-      s.src=API+'?'+p.toString();
-      s.onerror=()=>{clearTimeout(t);delete window[cbName];resolve({ok:false,error:'Ошибка сети'});};
-      document.head.appendChild(s);
-    });
-  }
+    params.set('callback',cbName);
+    const script=document.createElement('script');
+    const timer=setTimeout(()=>{
+      delete window[cbName];
+      if(script.parentNode)script.parentNode.removeChild(script);
+      resolve({ok:false,error:'Timeout — нет ответа'});
+    },25000);
+    window[cbName]=function(data){
+      clearTimeout(timer);
+      delete window[cbName];
+      if(script.parentNode)script.parentNode.removeChild(script);
+      resolve(data);
+    };
+    script.src=API+'?'+params.toString();
+    script.onerror=function(){
+      clearTimeout(timer);
+      delete window[cbName];
+      if(script.parentNode)script.parentNode.removeChild(script);
+      resolve({ok:false,error:'Ошибка сети'});
+    };
+    document.head.appendChild(script);
+  });
 }
 
 function populateUsers(){
